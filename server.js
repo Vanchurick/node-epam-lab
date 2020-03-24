@@ -1,27 +1,23 @@
-const http = require("http");
+const express = require("express");
+const app = express();
+const cors = require("cors");
 
-const getRequestInfo = require("./getRequestInfo");
-const writeRequests = require("./writeRequests");
-const getAllRequests = require("./getAllRequests");
-const parseUrl = require("./parseUrl");
+const log = require("./routes/api/middleware/log");
+const loginRouter = require("./routes/login");
+const userRouter = require("./routes/me");
+const auth = require("./routes/api/middleware/auth");
+const noteRouter = require("./routes/noteRouter");
+const registerUserRouter = require("./routes/registerUserRouter");
 
-http
-  .createServer((req, resp) => {
-    const requestInfo = getRequestInfo(req);
-    writeRequests(requestInfo);
+app.use(express.json());
+app.use(log);
+app.use(cors());
 
-    let response = { status: "ok" };
+app.use("/api", loginRouter);
+app.use("/api", registerUserRouter);
 
-    if (req.method === "GET" && req.url.includes("/requests")) {
-      let range = null;
-      if (req.url.includes("from") && req.url.includes("to")) {
-        range = parseUrl(req.url);
-      }
+app.use(auth);
+app.use("/api", userRouter);
+app.use("/api", noteRouter);
 
-      response = getAllRequests(range);
-    }
-
-    resp.writeHead(200, { "Content-type": "application/json" });
-    resp.end(JSON.stringify(response));
-  })
-  .listen(8801);
+app.listen(8801);

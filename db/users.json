@@ -1,0 +1,39 @@
+[
+    {
+        "id": 1,
+        "username": "Kyrylo",
+        "password": "12345",
+        "notes": [
+            "Kyrylo",
+            {
+                "text": "hey2",
+                "checked": false,
+                "id": 1584736322832
+            }
+        ]
+    },
+    {
+        "username": "Taras",
+        "password": "taras",
+        "notes": [],
+        "id": "NlPFCeDjw"
+    },
+    {
+        "username": "Kanvas",
+        "password": "taras",
+        "notes": [],
+        "id": "ppaDx9ECJ"
+    },
+    {
+        "username": "Ivan",
+        "password": "ivan",
+        "notes": [
+            {
+                "text": "hello2",
+                "checked": false,
+                "id": 1585072267081
+            }
+        ],
+        "id": "u9TO60dJ_"
+    }
+]
